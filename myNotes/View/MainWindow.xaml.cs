@@ -23,6 +23,7 @@ namespace myNotes
         public MainWindow()
         {
             InitializeComponent();
+            Console.Write("Hello world !");
         }
     }
 }
