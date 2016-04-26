@@ -5,8 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:myNotes"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="467.259" Width="692.005">
+    <Window.Resources>
+        <Style TargetType="Label" x:Key="Title">
+            <Setter Property="FontFamily" Value="pack://application:,,,/myNotes;Fonts/#Roboto" />
+            <Setter Property="FontSize" Value="20" />
+        </Style>
+    </Window.Resources>
     <Grid>
-        
+        <Label x:Name="label" Style="{DynamicResource Title}" Content="Mes notes" VerticalAlignment="Top" Panel.ZIndex="1" Height="40" HorizontalAlignment="Left" Width="151"/>
+        <Rectangle Fill="#FFF4F4F5" Stroke="Black" Margin="0,0,533,0"/>
     </Grid>
 </Window>
