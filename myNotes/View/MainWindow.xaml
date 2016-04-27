@@ -5,15 +5,102 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:myNotes"
         mc:Ignorable="d"
-        Title="MainWindow" Height="467.259" Width="692.005">
+       
+        WindowStyle="None"
+        AllowsTransparency="True"
+        MouseDown="Window_MouseDown"
+        Title="MainWindow" MinHeight="460" MinWidth="680" Height="460" Width="680">
     <Window.Resources>
         <Style TargetType="Label" x:Key="Title">
-            <Setter Property="FontFamily" Value="pack://application:,,,/myNotes;Fonts/#Roboto" />
+            <Setter Property="FontFamily" Value="/Resources/#GeosansLight" />
             <Setter Property="FontSize" Value="20" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
         </Style>
+
+        <Style TargetType="TextBlock" x:Key="TitreNote">
+            <Setter Property="FontFamily" Value="/Resources/#GeosansLight" />
+            <Setter Property="FontSize" Value="30" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Foreground" Value="Black" />
+        </Style>
+
+        <Style TargetType="Button" x:Key="FlatButtonStyleExit">
+            <Setter Property="Background" Value="#FFC78888"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Width" Value="35"/>
+            <Setter Property="Height" Value="35"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border BorderThickness="0"
+                            Background="{TemplateBinding Background}"
+                            CornerRadius="35">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#FFD43333"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="Button" x:Key="FlatButtonStyleMaximize">
+            <Setter Property="Background" Value="#FFC78888"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Width" Value="35"/>
+            <Setter Property="Height" Value="35"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border BorderThickness="0"
+                            Background="{TemplateBinding Background}"
+                            CornerRadius="35">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="DarkGoldenrod"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="Button" x:Key="FlatButtonStyleMinimize">
+            <Setter Property="Background" Value="#FFC78888"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Width" Value="35"/>
+            <Setter Property="Height" Value="35"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border BorderThickness="0"
+                            Background="{TemplateBinding Background}"
+                            CornerRadius="35">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="DarkGoldenrod"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
     </Window.Resources>
     <Grid>
-        <Label x:Name="label" Style="{DynamicResource Title}" Content="Mes notes" VerticalAlignment="Top" Panel.ZIndex="1" Height="40" HorizontalAlignment="Left" Width="151"/>
-        <Rectangle Fill="#FFF4F4F5" Stroke="Black" Margin="0,0,533,0"/>
+        <Label x:Name="label" Style="{StaticResource Title}" Content="Mes notes" VerticalAlignment="Top" Height="35" HorizontalAlignment="Left" Width="161" Margin="0,28,0,0"/>
+        <Button x:Name="exit" HorizontalAlignment="Left" Margin="6,8,0,0" VerticalAlignment="Top" Click="exit_Click" Style="{StaticResource FlatButtonStyleExit}" Height="15" Width="15"/>
+        <Button x:Name="minimize" HorizontalAlignment="Left" Margin="46,8,0,0" VerticalAlignment="Top" Click="exit_Click" Style="{StaticResource FlatButtonStyleMinimize}" Height="14" Width="15"/>
+        <Button x:Name="maximize" HorizontalAlignment="Left" Margin="26,8,0,0" VerticalAlignment="Top" Click="exit_Click" Style="{StaticResource FlatButtonStyleMaximize}" Background="#FFAA9D7C" Height="15" Width="15"/>
+        <Rectangle Fill="#2c3e50" HorizontalAlignment="Left"  Panel.ZIndex="-1" Width="161"/>
+        <Image x:Name="image" Margin="161,0,0,0" Source="/Resources/fond.jpg" Stretch="Fill" Panel.ZIndex="-1"/>
+        <TextBlock x:Name="contenu" Margin="166,97,10,10" TextWrapping="Wrap" Text="Ne pas oublier de ..."/>
+        <TextBlock x:Name="titre" Margin="166,28,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="47" Text="Titre" Style="{StaticResource TitreNote}"/>
     </Grid>
 </Window>
