@@ -8,8 +8,10 @@
        
         WindowStyle="None"
         AllowsTransparency="True"
+        ResizeMode="CanResizeWithGrip"
+        MouseMove="Window_MouseMove"
         MouseDown="Window_MouseDown"
-        Title="MainWindow" MinHeight="460" MinWidth="680" Height="460" Width="680">
+        Title="MainWindow" MinHeight="460" MinWidth="680" Height="511" Width="821">
     <Window.Resources>
         <Style TargetType="Label" x:Key="Title">
             <Setter Property="FontFamily" Value="/Resources/#GeosansLight" />
@@ -18,8 +20,8 @@
             <Setter Property="HorizontalContentAlignment" Value="Center" />
         </Style>
 
-        <Style TargetType="TextBlock" x:Key="TitreNote">
-            <Setter Property="FontFamily" Value="/Resources/#GeosansLight" />
+        <Style TargetType="TextBox" x:Key="TitreNote">
+            <Setter Property="FontFamily" Value="/Resources/#Roboto" />
             <Setter Property="FontSize" Value="30" />
             <Setter Property="FontWeight" Value="Bold" />
             <Setter Property="Foreground" Value="Black" />
@@ -27,7 +29,6 @@
 
         <Style TargetType="Button" x:Key="FlatButtonStyleExit">
             <Setter Property="Background" Value="#FFC78888"/>
-            <Setter Property="Foreground" Value="White"/>
             <Setter Property="Width" Value="35"/>
             <Setter Property="Height" Value="35"/>
             <Setter Property="Template">
@@ -48,8 +49,7 @@
             </Style.Triggers>
         </Style>
         <Style TargetType="Button" x:Key="FlatButtonStyleMaximize">
-            <Setter Property="Background" Value="#FFC78888"/>
-            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="CadetBlue"/>
             <Setter Property="Width" Value="35"/>
             <Setter Property="Height" Value="35"/>
             <Setter Property="Template">
@@ -65,13 +65,12 @@
             </Setter>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="DarkGoldenrod"/>
+                    <Setter Property="Background" Value="LightBlue"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
         <Style TargetType="Button" x:Key="FlatButtonStyleMinimize">
-            <Setter Property="Background" Value="#FFC78888"/>
-            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="#DCAA65"/>
             <Setter Property="Width" Value="35"/>
             <Setter Property="Height" Value="35"/>
             <Setter Property="Template">
@@ -91,16 +90,55 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
-
+        <Style TargetType="{x:Type RichTextBox}">
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="AllowDrop" Value="true"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBoxBase}">
+                        <Border 
+                              Name="Border"
+                              CornerRadius="2" 
+                              Padding="2"
+                              Background="Transparent"
+                              BorderBrush="Transparent"
+                              BorderThickness="1" >
+                              <ScrollViewer Margin="0" x:Name="PART_ContentHost"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="Border" Property="Background" Value="#EEEEEE"/>
+                                <Setter TargetName="Border" Property="BorderBrush" Value="#EEEEEE"/>
+                                <Setter Property="Foreground" Value="#888888"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Window.Resources>
     <Grid>
         <Label x:Name="label" Style="{StaticResource Title}" Content="Mes notes" VerticalAlignment="Top" Height="35" HorizontalAlignment="Left" Width="161" Margin="0,28,0,0"/>
-        <Button x:Name="exit" HorizontalAlignment="Left" Margin="6,8,0,0" VerticalAlignment="Top" Click="exit_Click" Style="{StaticResource FlatButtonStyleExit}" Height="15" Width="15"/>
-        <Button x:Name="minimize" HorizontalAlignment="Left" Margin="46,8,0,0" VerticalAlignment="Top" Click="exit_Click" Style="{StaticResource FlatButtonStyleMinimize}" Height="14" Width="15"/>
-        <Button x:Name="maximize" HorizontalAlignment="Left" Margin="26,8,0,0" VerticalAlignment="Top" Click="exit_Click" Style="{StaticResource FlatButtonStyleMaximize}" Background="#FFAA9D7C" Height="15" Width="15"/>
+        <Button x:Name="exit" HorizontalAlignment="Left" Margin="6,8,0,0" VerticalAlignment="Top" Click="exit_Click" Style="{StaticResource FlatButtonStyleExit}" Height="15" Width="15">
+            <Image Source="/Resources/exit.png" Height="11" Width="11" RenderOptions.BitmapScalingMode="HighQuality" />
+        </Button>
+        <Button x:Name="minimize" HorizontalAlignment="Left" Margin="46,8,0,0" VerticalAlignment="Top" Click="minimize_Click" Style="{StaticResource FlatButtonStyleMinimize}" Height="14" Width="15">
+            <Image Source="/Resources/minimize.png" Height="7" Width="9" RenderOptions.BitmapScalingMode="HighQuality"/>
+        </Button>
+        <Button x:Name="maximize" HorizontalAlignment="Left" Margin="26,8,0,0" VerticalAlignment="Top" Click="maximize_Click" Style="{StaticResource FlatButtonStyleMaximize}" Height="15" Width="15">
+            <Image Source="/Resources/maximize.png" Height="11" Width="11" RenderOptions.BitmapScalingMode="HighQuality"/>
+        </Button>
         <Rectangle Fill="#2c3e50" HorizontalAlignment="Left"  Panel.ZIndex="-1" Width="161"/>
-        <Image x:Name="image" Margin="161,0,0,0" Source="/Resources/fond.jpg" Stretch="Fill" Panel.ZIndex="-1"/>
-        <TextBlock x:Name="contenu" Margin="166,97,10,10" TextWrapping="Wrap" Text="Ne pas oublier de ..."/>
-        <TextBlock x:Name="titre" Margin="166,28,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="47" Text="Titre" Style="{StaticResource TitreNote}"/>
+        <RichTextBox x:Name="contenu"  Margin="178,97,28,28" Padding="5" AcceptsReturn="True" FontSize="18" BorderBrush="Transparent" Background="Transparent" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <FlowDocument>
+                <Paragraph FontSize="36">Hello, world !</Paragraph>
+                <Paragraph FontStyle="Italic" TextAlignment="Left" FontSize="14" Foreground="Gray">Thanks to the RichTextBox control, this FlowDocument is completely editable!</Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+        <TextBox x:Name="titre" Background="Transparent" BorderThickness="0 0 0 3" BorderBrush="#2c3e50" VerticalContentAlignment="Center" Padding="5" Margin="178,28,28,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="47" Text="Titre" Style="{StaticResource TitreNote}"/>
+        <Rectangle Fill="#2c3e50" Margin="161,0,0,0" Panel.ZIndex="-2"/>
+        <Rectangle Fill="#eee" Margin="161,10,10,10" Panel.ZIndex="-1"/>
     </Grid>
 </Window>
