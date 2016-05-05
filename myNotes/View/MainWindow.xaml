@@ -11,7 +11,7 @@
         ResizeMode="CanResizeWithGrip"
         MouseMove="Window_MouseMove"
         MouseDown="Window_MouseDown"
-        Title="MainWindow" MinHeight="460" MinWidth="680" Height="511" Width="821">
+        Title="MainWindow" MinHeight="460" MinWidth="680" Height="547" Width="821">
     <Window.Resources>
         <Style TargetType="Label" x:Key="Title">
             <Setter Property="FontFamily" Value="/Resources/#GeosansLight" />
@@ -105,7 +105,7 @@
                               Background="Transparent"
                               BorderBrush="Transparent"
                               BorderThickness="1" >
-                              <ScrollViewer Margin="0" x:Name="PART_ContentHost"/>
+                            <ScrollViewer Margin="0" x:Name="PART_ContentHost"/>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsEnabled" Value="False">
@@ -131,7 +131,7 @@
             <Image Source="/Resources/maximize.png" Height="11" Width="11" RenderOptions.BitmapScalingMode="HighQuality"/>
         </Button>
         <Rectangle Fill="#2c3e50" HorizontalAlignment="Left"  Panel.ZIndex="-1" Width="161"/>
-        <RichTextBox x:Name="contenu"  Margin="178,97,28,28" Padding="5" AcceptsReturn="True" FontSize="18" BorderBrush="Transparent" Background="Transparent" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+        <RichTextBox x:Name="contenu"  Margin="178,118,28,28" Padding="5" AcceptsReturn="True" FontSize="18" BorderBrush="Transparent" Background="Transparent" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
             <FlowDocument>
                 <Paragraph FontSize="36">Hello, world !</Paragraph>
                 <Paragraph FontStyle="Italic" TextAlignment="Left" FontSize="14" Foreground="Gray">Thanks to the RichTextBox control, this FlowDocument is completely editable!</Paragraph>
@@ -140,5 +140,9 @@
         <TextBox x:Name="titre" Background="Transparent" BorderThickness="0 0 0 3" BorderBrush="#2c3e50" VerticalContentAlignment="Center" Padding="5" Margin="178,28,28,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="47" Text="Titre" Style="{StaticResource TitreNote}"/>
         <Rectangle Fill="#2c3e50" Margin="161,0,0,0" Panel.ZIndex="-2"/>
         <Rectangle Fill="#eee" Margin="161,10,10,10" Panel.ZIndex="-1"/>
+        <Button x:Name="button" Background="Transparent" BorderBrush="Transparent" HorizontalAlignment="Left" Margin="178,82,0,0" VerticalAlignment="Top" Width="25" Height="25">
+            <Image Source="/Resources/align_left.png" RenderOptions.BitmapScalingMode="HighQuality"/>
+        </Button>
+        <Rectangle Fill="Black" HorizontalAlignment="Left" Height="1" Margin="178,112,0,0" VerticalAlignment="Top" Width="615"/>
     </Grid>
 </Window>
